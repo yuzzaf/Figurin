@@ -4,15 +4,17 @@ import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage() {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-200 px-4">
       <div className="w-full max-w-md">
         {/* Logo & Title */}
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-orange-500">KyOu.id</h1>
-          <p className="text-gray-600 mt-2">Explore your Hobby with Kyou!</p>
+          <h1 className="text-3xl font-bold text-orange-500">Figure.in</h1>
+          <p className="text-gray-600 mt-2">
+            Explore your Hobby with Figurein!
+          </p>
         </div>
 
         {/* Card */}
