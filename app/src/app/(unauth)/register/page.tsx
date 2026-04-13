@@ -27,21 +27,20 @@ export default function RegisterPage() {
           {/* Form */}
           <div className="space-y-4">
             <div>
-              <label className="text-sm text-gray-600">Full Name</label>
+              <label className="text-sm text-gray-600">Name</label>
               <input className="w-full mt-1 px-3 py-2 border rounded-md focus:ring-2 focus:ring-orange-400 outline-none" />
             </div>
 
+            <div>
+              <label className="text-sm text-gray-600">Username</label>
+              <input className="w-full mt-1 px-3 py-2 border rounded-md focus:ring-2 focus:ring-orange-400 outline-none" />
+            </div>
             <div>
               <label className="text-sm text-gray-600">Email</label>
               <input
                 type="email"
                 className="w-full mt-1 px-3 py-2 border rounded-md focus:ring-2 focus:ring-orange-400 outline-none"
               />
-            </div>
-
-            <div>
-              <label className="text-sm text-gray-600">Username</label>
-              <input className="w-full mt-1 px-3 py-2 border rounded-md focus:ring-2 focus:ring-orange-400 outline-none" />
             </div>
 
             {/* Password */}
