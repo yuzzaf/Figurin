@@ -18,7 +18,7 @@ const userSchema = z.object({
 
 export default class User {
   static getCollection() {
-    const collection = getDb().collection<IUser>("Users");
+    const collection = getDb().collection<IUser>("users");
     return collection;
   }
 
@@ -30,9 +30,15 @@ export default class User {
   static async register(body: IUser): Promise<string> {
     userSchema.parse(body);
 
+    const collection = this.getCollection();
+    const user = await collection.findOne({ email: body.email });
+
+    if (user) {
+      throw new Error("User already exists");
+    }
+
     body.password = hashPassword(body.password);
 
-    const collection = this.getCollection();
     await collection.insertOne({
       ...body,
       createdAt: new Date().toISOString(),
