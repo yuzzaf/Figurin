@@ -1,11 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
+import HeroCarousel from "./components/HeroCarousel";
 import { getProducts } from "./products/actions";
 import { ArrowRight, Flame, Sparkles } from "lucide-react";
 import InfiniteProductList from "./components/InfiniteProductList";
 
 async function getBanners() {
-  return ["/banner1.jpg", "/banner2.jpg", "/banner3.jpg"];
+  return [
+    "/images/banners/banner1.png", 
+    "/images/banners/banner2.png", 
+    "/images/banners/banner3.png",
+    "/images/banners/banner4.png"
+  ];
 }
 
 async function getCategories() {
@@ -30,37 +36,8 @@ export default async function HomePage() {
       {/* ===== PREMIUM HERO BENTO GRID ===== */}
       <section className="max-w-7xl mx-auto px-4 pt-8 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-auto md:h-[500px]">
-          {/* Main Big Banner */}
-          <div className="md:col-span-3 md:row-span-2 relative rounded-3xl overflow-hidden group shadow-lg">
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
-            <div className="w-full h-full bg-slate-200 absolute inset-0 flex items-center justify-center text-xs text-gray-500">
-              Banner 1
-            </div>
-            <Image
-              src={banners[0]}
-              alt="Hero Banner"
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-              unoptimized
-            />
-            <div className="absolute bottom-0 left-0 p-8 z-20 w-full md:w-2/3">
-              <span className="bg-orange-500 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4 inline-block">
-                Exclusive Release
-              </span>
-              <h1 className="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-3">
-                Elevate Your <span className="text-orange-400">Collection</span>
-              </h1>
-              <p className="text-gray-200 text-sm md:text-base mb-6 line-clamp-2">
-                Discover the most detailed and sought-after figures from around
-                the world. Secure yours before they're gone.
-              </p>
-              <Link href="/public/products">
-                <button className="bg-white text-black font-semibold px-6 py-3 rounded-full flex items-center gap-2 hover:bg-orange-500 hover:text-white transition-all shadow-lg hover:shadow-orange-500/50">
-                  Shop Now <ArrowRight size={18} />
-                </button>
-              </Link>
-            </div>
-          </div>
+          {/* Main Big Looping Banner */}
+          <HeroCarousel banners={banners} />
 
           {/* Side Banners */}
           <div className="md:col-span-1 md:row-span-1 relative rounded-3xl overflow-hidden group shadow-md">
