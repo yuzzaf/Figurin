@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ShoppingBag } from "lucide-react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getProducts } from "../products/actions";
@@ -56,7 +57,8 @@ export default function InfiniteProductList({ initialProducts }: { initialProduc
     >
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-8 pb-10">
         {products.map((item: any, index: number) => (
-          <div
+          <Link
+            href={`/public/products/${item._id || item.id}`}
             key={`${item._id || item.id}-${index}`}
             className="bg-white rounded-3xl p-4 shadow-[0_2px_20px_rgba(0,0,0,0.04)] border border-gray-100 hover:border-orange-200 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col group relative"
           >
@@ -120,7 +122,7 @@ export default function InfiniteProductList({ initialProducts }: { initialProduc
                 </p>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </InfiniteScroll>
