@@ -10,11 +10,11 @@ export default function LoginForm() {
   return (
     <div className="bg-white rounded-xl shadow p-6">
       <form action={loginAction}>
-        {/* Username */}
+        {/* Email */}
         <div className="mb-4">
-          <label className="text-sm text-gray-600">Username</label>
+          <label className="text-sm text-gray-600">Email</label>
           <input
-            name="username"
+            name="email"
             className="w-full mt-1 px-3 py-2 border rounded-md"
           />
         </div>
