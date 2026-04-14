@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, User, Mail, Sparkles, Hash } from "lucide-react";
 import { useActionState } from "react";
 import registerAction from "./actions";
+import Link from "next/link";
 
 const initialState = {
   error: "",
@@ -15,61 +16,72 @@ export default function RegisterForm() {
   const [state, formAction] = useActionState(registerAction, initialState);
 
   return (
-    <div className="bg-white rounded-xl shadow p-6">
-      <form action={formAction}>
-        {/* Social */}
-        <div className="space-y-3">
-          <button className="w-full bg-blue-600 text-white py-2 rounded-md">
-            Sign In with Facebook
-          </button>
-          <button className="w-full bg-gray-100 py-2 rounded-md">
-            Sign In with Google
-          </button>
-          <button className="w-full bg-black text-white py-2 rounded-md">
-            Sign In with X
-          </button>
+    <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white p-8">
+      <form action={formAction} className="space-y-4">
+        
+        {/* Row for Name and Username */}
+        <div className="flex gap-4">
+          <div className="flex-1">
+            <label className="block text-xs font-semibold text-gray-700 mb-1.5 uppercase tracking-wider">Name</label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <User size={16} className="text-gray-400" />
+              </div>
+              <input
+                name="name"
+                placeholder="John Doe"
+                className="w-full pl-9 pr-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all"
+                required
+              />
+            </div>
+          </div>
+          
+          <div className="flex-1">
+            <label className="block text-xs font-semibold text-gray-700 mb-1.5 uppercase tracking-wider">Username</label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Hash size={16} className="text-gray-400" />
+              </div>
+              <input
+                name="username"
+                placeholder="johndoe"
+                className="w-full pl-9 pr-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all"
+                required
+              />
+            </div>
+          </div>
         </div>
 
-        {/* Divider */}
-        <div className="flex items-center my-4">
-          <div className="flex-1 h-px bg-gray-300" />
-          <span className="px-3 text-sm text-gray-500">Or</span>
-          <div className="flex-1 h-px bg-gray-300" />
+        <div>
+          <label className="block text-xs font-semibold text-gray-700 mb-1.5 uppercase tracking-wider">Email</label>
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <Mail size={16} className="text-gray-400" />
+            </div>
+            <input
+              name="email"
+              type="email"
+              placeholder="you@example.com"
+              className="w-full pl-9 pr-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all"
+              required
+            />
+          </div>
         </div>
 
-        {/* Form */}
-        <div className="space-y-4">
-          <input
-            name="name"
-            placeholder="Name"
-            className="w-full px-3 py-2 border rounded-md text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-orange-400 outline-none"
-          />
-
-          <input
-            name="username"
-            placeholder="Username"
-            className="w-full px-3 py-2 border rounded-md text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-orange-400 outline-none"
-          />
-
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            className="w-full px-3 py-2 border rounded-md text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-orange-400 outline-none"
-          />
-
-          {/* Password */}
+        <div>
+          <label className="block text-xs font-semibold text-gray-700 mb-1.5 uppercase tracking-wider">Password</label>
           <div className="relative">
             <input
               name="password"
               type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              className="w-full px-3 py-2 border rounded-md text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-orange-400 outline-none"
+              placeholder="Min. 8 characters"
+              className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500 transition-all"
+              required
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-2 top-2"
+              className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600 transition-colors"
             >
               {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
@@ -78,22 +90,24 @@ export default function RegisterForm() {
 
         {/* Error */}
         {state?.error && (
-          <p className="text-red-500 text-sm mt-3">{state.error}</p>
+          <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm font-medium border border-red-100">
+            {state.error}
+          </div>
         )}
 
-        {/* Button */}
-        <button className="w-full mt-6 bg-orange-500 text-white py-2 rounded-md">
-          Register
+        <button className="w-full mt-2 flex items-center justify-center gap-2 bg-gradient-to-r from-rose-500 to-orange-500 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-rose-500/30 hover:shadow-orange-500/50 hover:-translate-y-0.5 transition-all duration-200">
+          <Sparkles size={18} /> Create Account
         </button>
       </form>
 
-      {/* Login Redirect */}
-      <p className="text-center text-sm text-orange-500 mt-4">
-        Already have an account?{" "}
-        <a href="/login" className="underline">
-          Click here!
-        </a>
-      </p>
+      <div className="mt-8 text-center bg-gray-50 -mx-8 -mb-8 p-6 rounded-b-3xl border-t border-gray-100">
+        <p className="text-sm text-gray-500">
+          Already a collector?{" "}
+          <Link href="/login" className="font-bold text-orange-500 hover:text-orange-600 transition-colors">
+            Sign In here
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
