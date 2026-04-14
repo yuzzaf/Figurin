@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { useActionState } from "react";
-import { registerAction } from "./actions";
+import registerAction from "./actions";
 
 const initialState = {
   error: "",

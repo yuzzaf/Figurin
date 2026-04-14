@@ -33,7 +33,11 @@ export default class User {
     body.password = hashPassword(body.password);
 
     const collection = this.getCollection();
-    await collection.insertOne(body);
+    await collection.insertOne({
+      ...body,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
 
     return "register berhasil";
   }
