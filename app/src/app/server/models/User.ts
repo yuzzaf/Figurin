@@ -35,8 +35,8 @@ export default class User {
     const collection = this.getCollection();
     await collection.insertOne({
       ...body,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     });
 
     return "register berhasil";

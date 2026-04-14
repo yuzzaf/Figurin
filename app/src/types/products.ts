@@ -1,5 +1,6 @@
-interface IProduct {
-  _id: string;
+import { ObjectId } from "mongodb";
+
+export interface IProduct {
   name: string;
   slug: string;
   description: string;
@@ -8,6 +9,10 @@ interface IProduct {
   tags: string[];
   thumbnail: string;
   images: string[];
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface IProductPublic extends IProduct {
+  _id: ObjectId;
 }
