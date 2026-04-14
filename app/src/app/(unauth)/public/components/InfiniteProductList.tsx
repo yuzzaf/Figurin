@@ -52,8 +52,8 @@ export default function InfiniteProductList({ initialProducts }: { initialProduc
           No more products to show.
         </p>
       }
-      className="overflow-visible!" // Fix for some react-infinite-scroll layout issues
-      style={{ overflow: "visible" }} // Ensure grid works smoothly
+      className="overflow-visible!" 
+      style={{ overflow: "visible" }}
     >
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-8 pb-10">
         {products.map((item: any, index: number) => (
