@@ -1,5 +1,5 @@
 import { getDb } from "@/app/server/config/mongodb";
-import { IProduct } from "@/types/products";
+import { IProduct, IProductQuery } from "@/types/products";
 import { ObjectId } from "mongodb";
 
 export default class Product {
@@ -8,35 +8,28 @@ export default class Product {
     return collection;
   }
 
-  static async getAllProducts(
-    page: number = 1,
-    limit: number = 10,
-    search?: string,
-    filter?: string,
-    sort?: string,
-  ) {
+  static async getAllProducts(options: IProductQuery = {}) {
     const collection = this.getCollection();
+    const { page = 1, limit = 10, search, filter, sort } = options;
     const skip = (page - 1) * limit;
 
-    const query: Record<string, any> = {};
-    if (search) {
-      query.name = { $regex: search, $options: "i" };
-    }
-    if (filter) {
-      query.tags = { $in: filter.split(",") };
-    }
-    let sortQuery: Record<string, 1 | -1> = { _id: -1 };
-    if (sort === "price-asc") {
-      sortQuery = { price: 1 };
-    } else if (sort === "price-desc") {
-      sortQuery = { price: -1 };
-    } else if (sort === "name-asc") {
-      sortQuery = { name: 1 };
-    }
+    const dbQuery: Record<string, any> = {
+      ...(search && { name: { $regex: search, $options: "i" } }),
+      ...(filter && { tags: { $in: filter.split(",") } }),
+    };
+
+    const sortOptions: Record<string, Record<string, 1 | -1>> = {
+      "price-asc": { price: 1 },
+      "price-desc": { price: -1 },
+      "name-asc": { name: 1 },
+      "name-desc": { name: -1 },
+    };
+
+    const sortQuery = (sort && sortOptions[sort]) || { _id: -1 };
 
     return await collection
-      .find(query)
-      .sort(sortQuery)
+      .find(dbQuery)
+      .sort(sortQuery as any)
       .skip(skip)
       .limit(limit)
       .toArray();

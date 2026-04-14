@@ -8,12 +8,12 @@ export async function GET(request: Request) {
   const filter = url.searchParams.get("filter") || undefined;
   const sort = url.searchParams.get("sortType") || undefined;
 
-  const products = await Product.getAllProducts(
+  const products = await Product.getAllProducts({
     page,
     limit,
     search,
     filter,
     sort,
-  );
-  return Response.json({ data: products, page, limit });
+  });
+  return Response.json({ data: products, page, limit }, { status: 200 });
 }

@@ -19,7 +19,7 @@ export default async function HomePage() {
   const [banners, categories, productsResponse] = await Promise.all([
     getBanners(),
     getCategories(),
-    getProducts(1, 8), // Ambil 8 baris buat gallery yg lebih seru
+    getProducts(1, 10),
   ]);
 
   const products = productsResponse?.data || [];
