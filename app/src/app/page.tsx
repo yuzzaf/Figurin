@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import HeroCarousel from "./(unauth)/public/components/HeroCarousel";
 import { getProducts } from "./(unauth)/public/products/actions";
-import { ArrowRight, Flame, Sparkles } from "lucide-react";
+import { Flame, Sparkles } from "lucide-react";
 import InfiniteProductList from "./(unauth)/public/components/InfiniteProductList";
 
 async function getBanners() {

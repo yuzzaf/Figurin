@@ -100,7 +100,7 @@ export default function CatalogClient() {
         <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <Link
-              href="/public"
+              href="/"
               className="flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-orange-600 transition-colors"
             >
               <ArrowLeft size={18} /> Home

@@ -1,8 +1,14 @@
 import RegisterForm from "./RegisterForm";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export default function RegisterPage() {
+export default async function RegisterPage() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("access_token");
+  if (token) redirect("/");
+
   return (
     <main className="min-h-screen flex items-center justify-center bg-zinc-50 relative overflow-hidden px-4 py-12">
       {/* Background glowing blobs */}

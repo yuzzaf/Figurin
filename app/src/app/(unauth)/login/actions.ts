@@ -31,3 +31,10 @@ export async function loginAction(prevState: any, formData: FormData) {
 
   redirect("/");
 }
+
+export async function handleLogout() {
+  const cookieStore = await cookies();
+  cookieStore.delete("access_token");
+  redirect("/login");
+}
+

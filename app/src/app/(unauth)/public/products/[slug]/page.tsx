@@ -20,7 +20,7 @@ export default async function ProductDetails({
           Product Not Found
         </h1>
         <Link
-          href="/public"
+          href="/"
           className="text-orange-500 hover:text-orange-600 transition-colors"
         >
           &larr; Back to Home
@@ -37,7 +37,7 @@ export default async function ProductDetails({
       <div className="border-b border-gray-100 bg-white sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link
-            href="/public/products"
+            href="/"
             className="flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-orange-600 transition-colors"
           >
             <ArrowLeft size={18} />
