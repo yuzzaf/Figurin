@@ -23,10 +23,25 @@ export default function CatalogClient() {
   const [filter, setFilter] = useState("");
   const [sort, setSort] = useState("");
   const [loading, setLoading] = useState(false);
+  const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {
     fetchInitialData();
   }, [search, filter, sort]);
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const resp = await fetch("/api/products/tags");
+      const data = await resp.json();
+      setCategories(data.data || []);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
 
   const fetchInitialData = async () => {
     setLoading(true);
@@ -102,6 +117,35 @@ export default function CatalogClient() {
                 <option value="name-asc">A - Z</option>
               </select>
             </div>
+          </div>
+        </div>
+
+        {/* Categories Bar */}
+        <div className="max-w-7xl mx-auto px-4 pb-4">
+          <div className="flex items-center gap-3 overflow-x-auto no-scrollbar py-2">
+            <button
+              onClick={() => setFilter("")}
+              className={`whitespace-nowrap px-6 py-2 rounded-xl text-xs font-black tracking-widest uppercase transition-all border ${
+                filter === "" 
+                ? "bg-gray-900 border-gray-900 text-white shadow-lg" 
+                : "bg-white border-gray-100 text-gray-400 hover:border-orange-500 hover:text-orange-500"
+              }`}
+            >
+              All Pieces
+            </button>
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setFilter(cat)}
+                className={`whitespace-nowrap px-6 py-2 rounded-xl text-xs font-black tracking-widest uppercase transition-all border ${
+                  filter === cat 
+                  ? "bg-orange-500 border-orange-500 text-white shadow-lg shadow-orange-500/20" 
+                  : "bg-white border-gray-100 text-gray-400 hover:border-orange-500 hover:text-orange-500"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
           </div>
         </div>
       </div>
