@@ -6,5 +6,9 @@ interface IProps {
 }
 
 export default async function UserLayout(props: IProps) {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("access_token");
+
+  if (token) redirect("/");
   return <>{props.children}</>;
 }

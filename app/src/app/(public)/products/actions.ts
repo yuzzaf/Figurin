@@ -19,6 +19,7 @@ export async function getProducts(
       headers: {
         "Content-Type": "application/json",
       },
+      cache: "no-store"
     }
   );
 

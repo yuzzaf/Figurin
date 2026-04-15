@@ -72,7 +72,7 @@ export default function WishlistClient() {
             Looks like you haven't added anything to your wishlist yet.
             Start exploring our collection!
           </p>
-          <Link href="/public/products">
+          <Link href="/products">
             <button className="bg-gradient-to-r from-orange-500 to-rose-500 text-white px-8 py-4 rounded-2xl font-black shadow-xl shadow-orange-500/20 hover:scale-105 transition-all flex items-center gap-2 mx-auto">
               Explore Collection <ArrowRight size={20} />
             </button>
@@ -130,7 +130,7 @@ export default function WishlistClient() {
                     </span>
                   </div>
                   
-                  <Link href={`/public/products/${item.product._id}`}>
+                  <Link href={`/products/${item.product._id}`}>
                     <button className="bg-gray-50 text-gray-900 px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-orange-500 hover:text-white transition-all">
                       View Piece
                     </button>

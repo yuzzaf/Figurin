@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-import Navbar from "./(unauth)/public/components/Navbar";
+import Navbar from "./(public)/components/Navbar";
 
 
 export const metadata: Metadata = {

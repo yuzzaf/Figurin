@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ArrowLeft, ShoppingBag, ShieldCheck, Truck, Star } from "lucide-react";
 import WishlistButton from "../../components/WishlistButton";
 
-
 export default async function ProductDetails({
   params,
 }: {

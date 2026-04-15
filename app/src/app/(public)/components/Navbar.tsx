@@ -36,7 +36,7 @@ export default async function Navbar() {
             <div className="hidden lg:flex items-center gap-1">
               {[
                 { name: "Home", href: "/" },
-                { name: "Catalog", href: "/public/products" },
+                { name: "Catalog", href: "/products" },
               ].map((item) => (
                 <Link
                   key={item.href}

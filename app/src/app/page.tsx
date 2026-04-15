@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import HeroCarousel from "./(unauth)/public/components/HeroCarousel";
-import { getProducts } from "./(unauth)/public/products/actions";
+import HeroCarousel from "./(public)/components/HeroCarousel";
+import { getProducts } from "./(public)/products/actions";
 import { Flame, Sparkles } from "lucide-react";
-import InfiniteProductList from "./(unauth)/public/components/InfiniteProductList";
+import InfiniteProductList from "./(public)/components/InfiniteProductList";
 
 async function getBanners() {
   return [
@@ -132,7 +132,7 @@ export default async function HomePage() {
               </p>
             </div>
           </div>
-          <Link href="/public/products">
+          <Link href="/products">
             <button className="relative z-10 bg-white text-orange-600 px-8 py-3 rounded-xl font-bold shadow-xl hover:bg-gray-50 transition-colors">
               View All Products
             </button>
