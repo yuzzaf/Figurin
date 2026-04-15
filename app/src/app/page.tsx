@@ -3,7 +3,7 @@ import Link from "next/link";
 import HeroCarousel from "./(public)/components/HeroCarousel";
 import { getProducts } from "./(public)/products/actions";
 import { Flame, Sparkles } from "lucide-react";
-import InfiniteProductList from "./(public)/components/InfiniteProductList";
+import ProductCard from "./(public)/components/ProductCard";
 
 async function getBanners() {
   return [
@@ -16,9 +16,9 @@ async function getBanners() {
 
 async function getCategories() {
   return [
-    { title: "POP UP & SCALE", image: "/category1.jpg" },
-    { title: "MERCHANDISE", image: "/category2.jpg" },
-    { title: "WIPEOUT DEALS!", image: "/category3.jpg" },
+    { title: "POP UP & SCALE", image: "/images/banners/banner1.png" },
+    { title: "MERCHANDISE", image: "/images/banners/banner2.png" },
+    { title: "WIPEOUT DEALS!", image: "/images/banners/banner3.png" },
   ];
 }
 
@@ -153,7 +153,11 @@ export default async function HomePage() {
           </div>
         </div>
 
-        <InfiniteProductList initialProducts={products} />
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-8 pb-10">
+          {products.slice(0, 10).map((item: any, index: number) => (
+            <ProductCard key={item._id || item.id} item={item} index={index} />
+          ))}
+        </div>
       </section>
     </main>
   );
