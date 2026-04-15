@@ -1,6 +1,7 @@
 import { getDb } from "@/app/server/config/mongodb";
 import { IProduct, IProductQuery } from "@/types/products";
 import { ObjectId } from "mongodb";
+import { NotFoundError } from "../helpers/customError";
 
 export default class Product {
   static getCollection() {
@@ -41,7 +42,7 @@ export default class Product {
     const product = await collection.findOne({ _id: new ObjectId(id) });
 
     if (!product) {
-      throw new Error("Product not found");
+      throw new NotFoundError("Product not found");
     }
 
     return product;
