@@ -47,4 +47,21 @@ export default class User {
 
     return "register berhasil";
   }
+
+  static async login(email: string, password: string): Promise<string> {
+    const collection = this.getCollection();
+    const user = await collection.findOne({ email });
+
+    if (!user) {
+      throw new Error("invalid email or password");
+    }
+
+    const isPasswordValid = comparePassword(password, user.password);
+
+    if (!isPasswordValid) {
+      throw new Error("invalid email or password");
+    }
+
+    return "login berhasil";
+  }
 }
