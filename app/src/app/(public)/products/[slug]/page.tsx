@@ -4,6 +4,59 @@ import Link from "next/link";
 import { ArrowLeft, ShoppingBag, ShieldCheck, Truck, Star } from "lucide-react";
 import WishlistButton from "../../components/WishlistButton";
 
+import type { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }> | { slug: string };
+}): Promise<Metadata> {
+  const resolvedParams = await Promise.resolve(params);
+  let product = null;
+
+  try {
+    product = await Product.getProductById(resolvedParams.slug);
+  } catch (error) {
+    return {
+      title: "Product Not Found | Figure.in",
+      description: "The product you are looking for does not exist.",
+    };
+  }
+
+  if (!product) {
+    return {
+      title: "Product Not Found | Figure.in",
+      description: "The product you are looking for does not exist.",
+    };
+  }
+
+  const ogImages = product.images?.length > 0 ? product.images : [
+    product.thumbnail || "https://dummyimage.com/1000x1000/ccc/fff"
+  ];
+
+  return {
+    title: `${product.name} | Figure.in Exclusive`,
+    description: product.excerpt || product.description?.substring(0, 160) || `Buy ${product.name} at Figure.in`,
+    openGraph: {
+      title: `${product.name} | Figure.in`,
+      description: product.excerpt || product.description?.substring(0, 160) || `Buy ${product.name} at Figure.in`,
+      images: ogImages.map((url: string) => ({
+        url,
+        width: 1000,
+        height: 1000,
+        alt: product.name,
+      })),
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: product.name,
+      description: product.excerpt || product.description?.substring(0, 160) || `Buy ${product.name} at Figure.in`,
+      images: [ogImages[0]],
+    },
+  };
+}
+
 export default async function ProductDetails({
   params,
 }: {
