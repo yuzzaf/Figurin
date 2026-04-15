@@ -3,6 +3,7 @@ import { comparePassword, hashPassword } from "../helpers/bcrypt";
 import { ObjectId } from "mongodb";
 import z from "zod";
 import { IUser } from "@/types/users";
+import { BadRequestError, UnauthorizedError } from "../helpers/customError";
 
 const userSchema = z.object({
   username: z
@@ -34,7 +35,7 @@ export default class User {
     const user = await collection.findOne({ email: body.email });
 
     if (user) {
-      throw new Error("User already exists");
+      throw new BadRequestError("User already exists");
     }
 
     body.password = hashPassword(body.password);
@@ -53,13 +54,13 @@ export default class User {
     const user = await collection.findOne({ email });
 
     if (!user) {
-      throw new Error("invalid email or password");
+      throw new UnauthorizedError("Invalid email or password");
     }
 
     const isPasswordValid = comparePassword(password, user.password);
 
     if (!isPasswordValid) {
-      throw new Error("invalid email or password");
+      throw new UnauthorizedError("Invalid email or password");
     }
 
     return "login berhasil";
