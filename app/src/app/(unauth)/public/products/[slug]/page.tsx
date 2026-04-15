@@ -2,6 +2,8 @@ import Product from "@/app/server/models/Product";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ShoppingBag, ShieldCheck, Truck, Star } from "lucide-react";
+import WishlistButton from "../../components/WishlistButton";
+
 
 export default async function ProductDetails({
   params,
@@ -71,7 +73,7 @@ export default async function ProductDetails({
 
               {/* Floating Element: Exclusive */}
               {product.price > 3000000 && (
-                <div className="absolute top-8 right-8 z-20 bg-black/90 backdrop-blur-sm text-white text-xs font-bold px-4 py-2 rounded-full shadow-2xl flex items-center gap-2">
+                <div className="absolute top-8 right-8 z-20 bg-gradient-to-r from-orange-600 to-rose-600 backdrop-blur-sm text-white text-xs font-bold px-4 py-2 rounded-full shadow-2xl flex items-center gap-2 border border-white/20">
                   <Star size={14} className="text-yellow-400 fill-yellow-400" />
                   PREMIUM EXCLUSIVE
                 </div>
@@ -139,6 +141,7 @@ export default async function ProductDetails({
               <button className="flex-1 bg-gradient-to-tr from-orange-600 to-rose-500 hover:from-orange-500 hover:to-rose-400 text-white font-bold text-lg py-5 rounded-2xl shadow-[0_10px_30px_rgba(249,115,22,0.3)] hover:shadow-[0_15px_40px_rgba(249,115,22,0.4)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
                 <ShoppingBag size={22} /> Add to Collection
               </button>
+              <WishlistButton productId={product._id.toString()} />
             </div>
 
             <div className="grid grid-cols-2 gap-6 bg-gray-50 p-6 rounded-3xl border border-gray-100">

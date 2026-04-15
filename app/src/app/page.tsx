@@ -119,7 +119,7 @@ export default async function HomePage() {
 
       {/* ===== FLASH SALE / HIGHLIGHT BAR ===== */}
       <section className="max-w-7xl mx-auto px-4 py-6">
-        <div className="bg-gray-900 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between text-white shadow-2xl relative overflow-hidden">
+        <div className="bg-gradient-to-br from-orange-600 to-rose-600 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between text-white shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500 rounded-full blur-[100px] opacity-30 -mr-20 -mt-20"></div>
           <div className="relative z-10 flex items-center gap-4 mb-4 md:mb-0">
             <div className="bg-orange-500/20 p-3 rounded-2xl">
@@ -127,13 +127,13 @@ export default async function HomePage() {
             </div>
             <div>
               <h2 className="text-2xl font-bold">New Arrivals Drop</h2>
-              <p className="text-gray-400 text-sm mt-1">
+              <p className="text-white/80 text-sm mt-1">
                 Check out the latest additions to our vault.
               </p>
             </div>
           </div>
           <Link href="/public/products">
-            <button className="relative z-10 bg-orange-500 text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-orange-500/30 hover:bg-orange-400 transition-colors">
+            <button className="relative z-10 bg-white text-orange-600 px-8 py-3 rounded-xl font-bold shadow-xl hover:bg-gray-50 transition-colors">
               View All Products
             </button>
           </Link>

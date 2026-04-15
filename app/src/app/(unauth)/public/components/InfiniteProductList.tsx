@@ -6,6 +6,8 @@ import Link from "next/link";
 import { ShoppingBag } from "lucide-react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getProducts } from "../products/actions";
+import WishlistButton from "./WishlistButton";
+
 
 export default function InfiniteProductList({ initialProducts }: { initialProducts: any[] }) {
   const [products, setProducts] = useState(initialProducts);
@@ -64,7 +66,7 @@ export default function InfiniteProductList({ initialProducts }: { initialProduc
           >
             {/* Badge for exclusivity */}
             {item.price > 3000000 && (
-              <div className="absolute top-6 right-6 z-20 bg-black text-white text-[10px] font-bold px-2 py-1 rounded-md shadow-md">
+              <div className="absolute top-6 right-6 z-20 bg-orange-500 text-white text-[10px] font-bold px-2 py-1 rounded-md shadow-md">
                 PREMIUM
               </div>
             )}
@@ -82,10 +84,13 @@ export default function InfiniteProductList({ initialProducts }: { initialProduc
               />
 
               {/* On-Hover Add to Cart overlay button */}
-              <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                 <button className="bg-white/90 backdrop-blur-sm text-gray-900 p-3 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all font-bold shadow-xl flex items-center gap-2">
                   <ShoppingBag size={18} />
                 </button>
+                <div className="transform translate-y-4 group-hover:translate-y-0 transition-all delay-75">
+                  <WishlistButton productId={item._id || item.id} variant="icon" />
+                </div>
               </div>
             </div>
 

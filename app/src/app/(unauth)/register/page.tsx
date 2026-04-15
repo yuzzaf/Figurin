@@ -14,9 +14,12 @@ export default async function RegisterPage() {
       {/* Background glowing blobs */}
       <div className="absolute top-[20%] left-[-5%] w-96 h-96 bg-rose-400 rounded-full mix-blend-multiply filter blur-[128px] opacity-30 animate-blob"></div>
       <div className="absolute bottom-[-10%] right-[10%] w-96 h-96 bg-orange-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-30 animate-blob animation-delay-4000"></div>
-      
+
       <div className="w-full max-w-md relative z-10">
-        <Link href="/public" className="absolute -top-12 left-0 flex items-center gap-2 text-sm text-gray-500 hover:text-orange-600 transition-colors">
+        <Link
+          href="/"
+          className="absolute -top-12 left-0 flex items-center gap-2 text-sm text-gray-500 hover:text-orange-600 transition-colors"
+        >
           <ArrowLeft size={16} /> Back to Home
         </Link>
         <div className="text-center mb-8">
