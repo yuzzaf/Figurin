@@ -6,18 +6,23 @@ import { ArrowLeft, ShoppingBag, ShieldCheck, Truck, Star } from "lucide-react";
 export default async function ProductDetails({
   params,
 }: {
-  params: Promise<{ id: string }> | { id: string };
+  params: Promise<{ slug: string }> | { slug: string };
 }) {
   const resolvedParams = await Promise.resolve(params);
   let product = null;
 
   try {
-    product = await Product.getProductById(resolvedParams.id);
+    product = await Product.getProductById(resolvedParams.slug);
   } catch (error) {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">Product Not Found</h1>
-        <Link href="/public" className="text-orange-500 hover:text-orange-600 transition-colors">
+        <h1 className="text-3xl font-bold text-gray-800 mb-4">
+          Product Not Found
+        </h1>
+        <Link
+          href="/public"
+          className="text-orange-500 hover:text-orange-600 transition-colors"
+        >
           &larr; Back to Home
         </Link>
       </main>
@@ -52,7 +57,10 @@ export default async function ProductDetails({
             <div className="relative w-full aspect-square bg-gray-50 rounded-[3rem] border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.03)] flex items-center justify-center overflow-hidden cursor-crosshair group">
               <div className="absolute inset-0 bg-white backdrop-blur-md opacity-0 group-hover:opacity-10 transition-opacity z-10 pointer-events-none" />
               <Image
-                src={product.thumbnail || "https://dummyimage.com/1000x1000/ccc/fff"}
+                src={
+                  product.thumbnail ||
+                  "https://dummyimage.com/1000x1000/ccc/fff"
+                }
                 alt={product.name}
                 fill
                 className="object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-700 ease-out"
@@ -60,7 +68,7 @@ export default async function ProductDetails({
                 priority
                 unoptimized
               />
-              
+
               {/* Floating Element: Exclusive */}
               {product.price > 3000000 && (
                 <div className="absolute top-8 right-8 z-20 bg-black/90 backdrop-blur-sm text-white text-xs font-bold px-4 py-2 rounded-full shadow-2xl flex items-center gap-2">
@@ -74,10 +82,13 @@ export default async function ProductDetails({
             {product.images && product.images.length > 0 && (
               <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
                 {product.images.map((img: string, i: number) => (
-                  <div key={i} className="relative w-24 h-24 flex-shrink-0 bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden cursor-pointer hover:border-orange-500 transition-colors">
-                     <Image
+                  <div
+                    key={i}
+                    className="relative w-24 h-24 flex-shrink-0 bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden cursor-pointer hover:border-orange-500 transition-colors"
+                  >
+                    <Image
                       src={img}
-                      alt={`Gallery ${i+1}`}
+                      alt={`Gallery ${i + 1}`}
                       fill
                       className="object-cover mix-blend-multiply"
                       unoptimized
@@ -133,20 +144,30 @@ export default async function ProductDetails({
             <div className="grid grid-cols-2 gap-6 bg-gray-50 p-6 rounded-3xl border border-gray-100">
               <div className="flex flex-col gap-2">
                 <ShieldCheck className="text-orange-500" size={24} />
-                <h4 className="font-bold text-gray-900 text-sm">Authentic Guarantee</h4>
-                <p className="text-xs text-gray-500">100% genuine verified products.</p>
+                <h4 className="font-bold text-gray-900 text-sm">
+                  Authentic Guarantee
+                </h4>
+                <p className="text-xs text-gray-500">
+                  100% genuine verified products.
+                </p>
               </div>
               <div className="flex flex-col gap-2">
                 <Truck className="text-orange-500" size={24} />
-                <h4 className="font-bold text-gray-900 text-sm">Secure Shipping</h4>
-                <p className="text-xs text-gray-500">Fully insured and trackable.</p>
+                <h4 className="font-bold text-gray-900 text-sm">
+                  Secure Shipping
+                </h4>
+                <p className="text-xs text-gray-500">
+                  Fully insured and trackable.
+                </p>
               </div>
             </div>
 
             {/* Complete Description */}
             {product.description && (
               <div className="mt-10 pt-10 border-t border-gray-100">
-                <h3 className="text-xl font-bold text-gray-900 mb-6">About this piece</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-6">
+                  About this piece
+                </h3>
                 <div className="prose prose-orange max-w-none text-gray-600 text-base leading-loose">
                   <p>{product.description}</p>
                 </div>

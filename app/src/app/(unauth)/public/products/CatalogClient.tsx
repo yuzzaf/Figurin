@@ -3,7 +3,12 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingBag, Search, SlidersHorizontal, ArrowLeft } from "lucide-react";
+import {
+  ShoppingBag,
+  Search,
+  SlidersHorizontal,
+  ArrowLeft,
+} from "lucide-react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getProducts } from "./actions";
 
@@ -32,9 +37,15 @@ export default function CatalogClient() {
       setLoading(true);
       setPage(1);
       setHasMore(true);
-      
+
       try {
-        const resp = await getProducts(1, 10, debouncedSearch, filterTag, sortType);
+        const resp = await getProducts(
+          1,
+          10,
+          debouncedSearch,
+          filterTag,
+          sortType,
+        );
         setProducts(resp.data || []);
         if ((resp.data || []).length < 10) {
           setHasMore(false);
@@ -53,16 +64,24 @@ export default function CatalogClient() {
     try {
       const nextPage = page + 1;
       await new Promise((res) => setTimeout(res, 500)); // Simulasi loading UI
-      const resp = await getProducts(nextPage, 10, debouncedSearch, filterTag, sortType);
-      
+      const resp = await getProducts(
+        nextPage,
+        10,
+        debouncedSearch,
+        filterTag,
+        sortType,
+      );
+
       const newProducts = resp.data || [];
       if (newProducts.length === 0) {
         setHasMore(false);
       } else {
-        setProducts(prev => {
+        setProducts((prev) => {
           // Prevent duplicates
-          const existingIds = new Set(prev.map(p => p._id || p.id));
-          const filtered = newProducts.filter((p: any) => !existingIds.has(p._id || p.id));
+          const existingIds = new Set(prev.map((p) => p._id || p.id));
+          const filtered = newProducts.filter(
+            (p: any) => !existingIds.has(p._id || p.id),
+          );
           return [...prev, ...filtered];
         });
         setPage(nextPage);
@@ -104,7 +123,7 @@ export default function CatalogClient() {
                 className="pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500/50 w-full md:w-64 transition-all"
               />
             </div>
-            
+
             <select
               value={sortType}
               onChange={(e) => setSortType(e.target.value)}
@@ -123,14 +142,21 @@ export default function CatalogClient() {
         {/* Filter Badges */}
         <div className="flex items-center gap-2 mb-8 overflow-x-auto pb-2 scrollbar-hide">
           <SlidersHorizontal size={18} className="text-gray-400 mr-2" />
-          {["", "scale figure", "nendoroid", "figma", "action figure", "prize"].map((tag) => (
+          {[
+            "",
+            "scale figure",
+            "nendoroid",
+            "figma",
+            "action figure",
+            "prize",
+          ].map((tag) => (
             <button
               key={tag}
               onClick={() => setFilterTag(tag)}
               className={`whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-wider transition-all ${
-                filterTag === tag 
-                ? "bg-orange-500 text-white shadow-lg shadow-orange-500/30" 
-                : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+                filterTag === tag
+                  ? "bg-orange-500 text-white shadow-lg shadow-orange-500/30"
+                  : "bg-gray-100 text-gray-500 hover:bg-gray-200"
               }`}
             >
               {tag === "" ? "All" : tag}
@@ -144,8 +170,12 @@ export default function CatalogClient() {
           </div>
         ) : products.length === 0 ? (
           <div className="text-center py-20">
-            <h3 className="text-2xl font-bold text-gray-800 mb-2">No figures found</h3>
-            <p className="text-gray-500">Try adjusting your search or filters.</p>
+            <h3 className="text-2xl font-bold text-gray-800 mb-2">
+              No figures found
+            </h3>
+            <p className="text-gray-500">
+              Try adjusting your search or filters.
+            </p>
           </div>
         ) : (
           <InfiniteScroll
@@ -162,7 +192,7 @@ export default function CatalogClient() {
                 You've reached the end of the catalog.
               </p>
             }
-            className="overflow-visible!" 
+            className="overflow-visible!"
             style={{ overflow: "visible" }}
           >
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 pb-10">
@@ -182,7 +212,10 @@ export default function CatalogClient() {
                   {/* Thumbnail Image */}
                   <div className="relative h-[200px] md:h-[240px] w-full bg-gray-50 rounded-2xl mb-4 overflow-hidden flex-shrink-0">
                     <Image
-                      src={item.thumbnail || "https://dummyimage.com/600x600/ccc/fff"}
+                      src={
+                        item.thumbnail ||
+                        "https://dummyimage.com/600x600/ccc/fff"
+                      }
                       alt={item.name || "Product image"}
                       fill
                       className="object-cover mix-blend-multiply group-hover:scale-110 transition-transform duration-700"
@@ -220,7 +253,8 @@ export default function CatalogClient() {
                   <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
                     <div>
                       <p className="text-gray-900 font-black text-lg relative inline-block">
-                        Rp {item.price ? item.price.toLocaleString("id-ID") : "0"}
+                        Rp{" "}
+                        {item.price ? item.price.toLocaleString("id-ID") : "0"}
                       </p>
                     </div>
                   </div>
