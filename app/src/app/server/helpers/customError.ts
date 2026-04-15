@@ -24,3 +24,9 @@ export class NotFoundError extends CustomError {
     super(message, 404);
   }
 }
+
+export class ForbiddenError extends CustomError {
+  constructor(message: string = "ForbiddenError") {
+    super(message, 403);
+  }
+}
