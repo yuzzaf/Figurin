@@ -47,4 +47,10 @@ export default class Product {
 
     return product;
   }
+
+  static async getTags() {
+    const collection = this.getCollection();
+    const tags = await collection.distinct("tags");
+    return tags;
+  }
 }

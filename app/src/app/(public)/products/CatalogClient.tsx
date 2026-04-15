@@ -146,7 +146,10 @@ export default function CatalogClient() {
                   {/* Thumbnail Image */}
                   <div className="relative aspect-square w-full bg-gray-50 rounded-2xl mb-4 overflow-hidden flex-shrink-0">
                     <Image
-                      src={item.thumbnail || "https://dummyimage.com/400x400/ccc/fff"}
+                      src={
+                        item.thumbnail ||
+                        "https://dummyimage.com/400x400/ccc/fff"
+                      }
                       alt={item.name}
                       fill
                       className="object-cover mix-blend-multiply group-hover:scale-110 transition-transform duration-700"
@@ -159,21 +162,26 @@ export default function CatalogClient() {
                         <ShoppingBag size={18} />
                       </button>
                       <div className="transform translate-y-4 group-hover:translate-y-0 transition-all delay-75">
-                        <WishlistButton productId={item._id || item.id} variant="icon" />
+                        <WishlistButton
+                          productId={item._id || item.id}
+                          variant="icon"
+                        />
                       </div>
                     </div>
                   </div>
 
                   {/* Area Tags */}
                   <div className="flex flex-wrap gap-1.5 mb-3">
-                    {(item.tags || []).slice(0, 2).map((tag: string, idx: number) => (
-                      <span
-                        key={idx}
-                        className="bg-orange-50 text-orange-600 px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                    {(item.tags || [])
+                      .slice(0, 2)
+                      .map((tag: string, idx: number) => (
+                        <span
+                          key={idx}
+                          className="bg-orange-50 text-orange-600 px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest"
+                        >
+                          {tag}
+                        </span>
+                      ))}
                   </div>
 
                   {/* Title & Excerpt */}
@@ -188,7 +196,8 @@ export default function CatalogClient() {
                         Valuation
                       </p>
                       <p className="text-gray-900 font-black text-base md:text-lg">
-                        Rp {item.price ? item.price.toLocaleString("id-ID") : "0"}
+                        Rp{" "}
+                        {item.price ? item.price.toLocaleString("id-ID") : "0"}
                       </p>
                     </div>
                   </div>
