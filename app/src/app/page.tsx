@@ -1,16 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import HeroCarousel from "./components/HeroCarousel";
-import { getProducts } from "./products/actions";
+import HeroCarousel from "./(unauth)/public/components/HeroCarousel";
+import { getProducts } from "./(unauth)/public/products/actions";
 import { ArrowRight, Flame, Sparkles } from "lucide-react";
-import InfiniteProductList from "./components/InfiniteProductList";
+import InfiniteProductList from "./(unauth)/public/components/InfiniteProductList";
 
 async function getBanners() {
   return [
-    "/images/banners/banner1.png", 
-    "/images/banners/banner2.png", 
+    "/images/banners/banner1.png",
+    "/images/banners/banner2.png",
     "/images/banners/banner3.png",
-    "/images/banners/banner4.png"
+    "/images/banners/banner4.png",
   ];
 }
 
