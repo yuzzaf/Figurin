@@ -4,6 +4,7 @@ import { ObjectId } from "mongodb";
 import z from "zod";
 import { IUser } from "@/types/users";
 import { BadRequestError, UnauthorizedError } from "../helpers/customError";
+import { signToken } from "../helpers/jwt";
 
 const userSchema = z.object({
   username: z
@@ -63,6 +64,11 @@ export default class User {
       throw new UnauthorizedError("Invalid email or password");
     }
 
-    return "login berhasil";
+    const token = signToken<{ _id: ObjectId; email: string }>({
+      _id: user._id,
+      email: user.email,
+    });
+
+    return token;
   }
 }
